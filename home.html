@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <div class="page-nav">
+    <a href="home.html" class="nav-btn active">Greetings</a>
+    <a href="parameters.html" class="nav-btn">Parameter system</a>
+    <a href="gallery.html" class="nav-btn">Gallery</a>
+    <a href="about.html" class="nav-btn">About</a>
+  </div>
+  <main class="home">
+    <h1 class="home__title page-title">Greetings</h1>
+    <p class="home__text home__text--gestures">Gestures like <a href="waving.html" class="gesture-link">waving <img src="assets/shapes/waving-shape.png" alt="" class="home__gesture-shape"></a> or <a href="handshake.html" class="gesture-link">a handshake<img src="assets/shapes/handshake-shape.png" alt="" class="home__gesture-shape"></a> feel today like the most universal default way to say <a href="index.html" class="home__intro-link">hello</a>, until you arrive somewhere where there's no contact at all and <a href="wai.html" class="gesture-link">bowing<img src="assets/shapes/wai-shape.png" alt="" class="home__gesture-shape"></a> is the norm. In other parts of the world, people greet each other with <a href="hug.html" class="gesture-link">a hug<img src="assets/shapes/hug-shape.png" alt="" class="home__gesture-shape"></a> or even <a href="cheek-kiss.html" class="gesture-link">a cheek kiss<img src="assets/shapes/cheek-kiss-shape.png" alt="" class="home__gesture-shape"></a>. An older way to say hello is <a href="hand-kiss.html" class="gesture-link">a kiss on the hand<img src="assets/shapes/hand-kiss-shape.png" alt="" class="home__gesture-shape"></a>. And every now and then, you'll run into <a href="fist-bump.html" class="gesture-link">a fist bump<img src="assets/shapes/fist-bump-shape.png" alt="" class="home__gesture-shape"></a> too.</p>
+  </main>
+  <script>
+    const paragraph = document.querySelector('.home__text--gestures');
+    const gestureLinks = document.querySelectorAll('.gesture-link');
+    
+    gestureLinks.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        paragraph.classList.add('is-dim');
+        gestureLinks.forEach(l => l.classList.remove('is-active'));
+        this.classList.add('is-active');
+      });
+      
+      link.addEventListener('mouseleave', function() {
+        paragraph.classList.remove('is-dim');
+        this.classList.remove('is-active');
+      });
+    });
+  </script>
+</body>
+</html>
