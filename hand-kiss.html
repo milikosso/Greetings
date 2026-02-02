@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hand kissing</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body class="scroll-page">
+  <div class="page-nav">
+    <a href="home.html" class="nav-btn">Greetings</a>
+    <a href="parameters.html" class="nav-btn">Parameter system</a>
+    <a href="gallery.html" class="nav-btn">Gallery</a>
+    <a href="about.html" class="nav-btn">About</a>
+  </div>
+  <main class="gesture-page">
+    <div class="gesture-shape" aria-hidden="true">
+      <img src="assets/shapes/hand-kiss-shape.png" alt="">
+    </div>
+    <div class="gesture-page__layout">
+      <div class="gesture-page__left">
+        <h1 class="page-title"><a href="home.html">Hand kissing</a></h1>
+        <p class="gesture-page__description">Hand kissing is a greeting in which one person takes another's hand, traditionally a woman's, an elder's, or a person of higher status, and brings it toward the lips, often touching the hand lightly or miming the kiss as a gesture of respect, admiration, or courtly politeness. It appears in certain European, Middle Eastern, and ceremonial contexts, and today it can feel old-fashioned, theatrical, or formal, used more in special occasions than everyday life. Because it carries strong signals of gender, hierarchy, and etiquette, hand kissing can read as charming to some and uncomfortable or patronizing to others, depending on consent, setting, and tone. When welcomed, it can feel flattering and distinctly celebratory.</p>
+        <div class="left-gallery" id="leftGallery">
+          <div class="left-gallery__column left-gallery__column--left"></div>
+          <div class="left-gallery__column left-gallery__column--right"></div>
+        </div>
+        <div class="gesture-page__criteria">
+          <div class="gesture-page__criteria-grid">
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Symmetry</div>
+              <div class="gesture-page__criterion-value">0%</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Physical contact</div>
+              <div class="gesture-page__criterion-value">30%</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Body interlocking</div>
+              <div class="gesture-page__criterion-value">10%</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Warmth</div>
+              <div class="gesture-page__criterion-value">10%</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Eye contact</div>
+              <div class="gesture-page__criterion-value">No</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Facial expression</div>
+              <div class="gesture-page__criterion-value">Ceremonial</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Typical duration</div>
+              <div class="gesture-page__criterion-value">1-3 sec</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Standing distance</div>
+              <div class="gesture-page__criterion-value">20-50 cm</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Formality</div>
+              <div class="gesture-page__criterion-value">95%</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Power balance</div>
+              <div class="gesture-page__criterion-value">Not equal</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Body parts used</div>
+              <div class="gesture-page__criterion-value">Hands, lips, back</div>
+            </div>
+            <div class="gesture-page__criterion">
+              <div class="gesture-page__criterion-label">Body orientation</div>
+              <div class="gesture-page__criterion-value">Forward</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gesture-page__right">
+        <div class="gesture-page__images">
+          <img src="assets/images/Hand-kissing-1.jpg" alt="">
+          <img src="assets/images/Hand-kissing-2.jpg" alt="">
+          <img src="assets/images/Hand-kissing-3.jpg" alt="">
+          <img src="assets/images/Hand-kissing-4.jpg" alt="">
+          <img src="assets/images/Hand-kissing-5.jpg" alt="">
+          <img src="assets/images/Hand-kissing-6.jpg" alt="">
+          <img src="assets/images/Hand-kissing-7.jpg" alt="">
+          <img src="assets/images/Hand-kissing-8.jpg" alt="">
+          <img src="assets/images/Hand-kissing-9.jpg" alt="">
+          <img src="assets/images/Hand-kissing-10.jpg" alt="">
+          <img src="assets/images/Hand-kissing-11.jpg" alt="">
+          <img src="assets/images/Hand-kissing-12.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const description = document.querySelector('.gesture-page__description');
+    const imagesContainer = document.querySelector('.gesture-page__images');
+    const rightColumn = document.querySelector('.gesture-page__right');
+    const leftColumn = document.querySelector('.gesture-page__left');
+    
+    if (description && imagesContainer && rightColumn && leftColumn) {
+      let descriptionExited = false;
+      let exitScrollY = null;
+      
+      function updateImagePosition() {
+        const descriptionRect = description.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        
+        // Get right column's position in document
+        const rightColumnRect = rightColumn.getBoundingClientRect();
+        const rightColumnTopInDocument = rightColumnRect.top + scrollY;
+        
+        // Check if description has completely exited (top is below viewport bottom)
+        const hasExited = descriptionRect.top > viewportHeight;
+        
+        if (hasExited && !descriptionExited) {
+          // Description just exited - record the moment
+          descriptionExited = true;
+          exitScrollY = scrollY;
+          // Get description's bottom position when it exited
+          const descriptionBottomWhenExited = descriptionRect.bottom + scrollY;
+          // Position images so first image starts at bottom of viewport
+          const imagesTop = descriptionBottomWhenExited - rightColumnTopInDocument;
+          imagesContainer.style.top = `${imagesTop}px`;
+        } else if (hasExited && descriptionExited) {
+          // Description has exited, images scroll up naturally
+          // Calculate how much we've scrolled since exit
+          const scrollSinceExit = scrollY - exitScrollY;
+          const descriptionBottomWhenExited = descriptionRect.bottom + scrollY;
+          const imagesTop = descriptionBottomWhenExited - rightColumnTopInDocument - scrollSinceExit;
+          imagesContainer.style.top = `${imagesTop}px`;
+        } else {
+          // Description still visible, keep images hidden below viewport
+          descriptionExited = false;
+          exitScrollY = null;
+          imagesContainer.style.top = `${viewportHeight + 2000}px`;
+        }
+        
+        // Ensure left column matches the full document height for sticky to work
+        const documentHeight = Math.max(
+          document.body.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight,
+          document.documentElement.scrollHeight,
+          document.documentElement.offsetHeight
+        );
+        leftColumn.style.minHeight = `${documentHeight}px`;
+      }
+      
+      // Update on scroll
+      window.addEventListener('scroll', updateImagePosition);
+      // Update on resize
+      window.addEventListener('resize', updateImagePosition);
+      // Initial calculation
+      updateImagePosition();
+    }
+
+    // Small thumbnail gallery interaction (DISABLED)
+    const galleryContainer = document.getElementById('leftGallery');
+    const galleryLeftCol = galleryContainer?.querySelector('.left-gallery__column--left');
+    const galleryRightCol = galleryContainer?.querySelector('.left-gallery__column--right');
+    const rightImages = document.querySelectorAll('.gesture-page__images img');
+    
+    if (false && galleryContainer && galleryLeftCol && galleryRightCol && rightImages.length > 0) {
+      const thumbnailMap = new Map(); // Track thumbnails by image index
+      let galleryLastScrollY = window.scrollY;
+      
+      // Get available height for gallery
+      function getAvailableHeight() {
+        const galleryRect = galleryContainer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const galleryTop = galleryRect.top;
+        return viewportHeight - galleryTop - 20;
+      }
+      
+      // Calculate total height of items in a column
+      function getColumnHeight(columnElement) {
+        let totalHeight = 0;
+        const items = columnElement.querySelectorAll('.left-gallery__item');
+        items.forEach(item => {
+          const img = item.querySelector('img');
+          if (img) {
+            const height = img.offsetHeight || img.naturalHeight * (columnElement.offsetWidth / img.naturalWidth);
+            totalHeight += height + 10; // gap
+          }
+        });
+        return totalHeight;
+      }
+      
+      // Determine which column to use (left first, then right)
+      function getTargetColumn(estimatedThumbnailHeight = 150) {
+        const leftHeight = getColumnHeight(galleryLeftCol);
+        const availableHeight = getAvailableHeight();
+        
+        // Check if left column has space for this thumbnail
+        if (leftHeight + estimatedThumbnailHeight + 10 <= availableHeight) {
+          return galleryLeftCol;
+        }
+        return galleryRightCol;
+      }
+      
+      // Create thumbnail when image exits
+      function createThumbnail(img, index) {
+        // Check if already exists
+        if (thumbnailMap.has(index)) {
+          return;
+        }
+        
+        // Estimate thumbnail height (will be refined after load)
+        const estimatedHeight = img.naturalHeight * (galleryLeftCol.offsetWidth / img.naturalWidth) || 150;
+        
+        // Determine target column
+        const targetColumn = getTargetColumn(estimatedHeight);
+        
+        // Create thumbnail element
+        const itemWrapper = document.createElement('div');
+        itemWrapper.className = 'left-gallery__item';
+        const thumbnail = img.cloneNode(true);
+        itemWrapper.appendChild(thumbnail);
+        
+        targetColumn.appendChild(itemWrapper);
+        
+        // Store reference
+        thumbnailMap.set(index, itemWrapper);
+      }
+      
+      // Remove thumbnail when image re-enters
+      function removeThumbnail(index) {
+        const thumbnail = thumbnailMap.get(index);
+        if (thumbnail && thumbnail.parentNode) {
+          thumbnail.remove();
+          thumbnailMap.delete(index);
+        }
+      }
+      
+      // Observe each right column image
+      rightImages.forEach((img, index) => {
+        let hasExited = false;
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const rect = entry.boundingClientRect;
+            const currentScrollY = window.scrollY;
+            const scrollDirection = currentScrollY > galleryLastScrollY ? 'down' : 'up';
+            galleryLastScrollY = currentScrollY;
+            
+            // Image has exited upward (scrolling down)
+            if (!entry.isIntersecting && rect.top < 0 && !hasExited && scrollDirection === 'down') {
+              hasExited = true;
+              createThumbnail(img, index);
+            }
+            
+            // Image re-enters viewport (scrolling up) - remove thumbnail
+            if (entry.isIntersecting && rect.top >= 0 && hasExited && scrollDirection === 'up') {
+              hasExited = false;
+              removeThumbnail(index);
+            }
+          });
+        }, {
+          threshold: 0,
+          rootMargin: '0px'
+        });
+        
+        observer.observe(img);
+      });
+    }
+  </script>
+</body>
+</html>
